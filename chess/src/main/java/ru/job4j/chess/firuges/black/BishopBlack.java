@@ -7,11 +7,13 @@ public class BishopBlack implements Figure {
     private final Cell position;
 
     public BishopBlack(final Cell position) {
+
         this.position = position;
     }
 
     @Override
     public Cell position() {
+
         return this.position;
     }
 
@@ -23,11 +25,13 @@ public class BishopBlack implements Figure {
     }
 
     public boolean isDiagonal(Cell source, Cell dest) {
+
         return false;
     }
 
     @Override
     public Figure copy(Cell dest) {
+
         return new BishopBlack(dest);
     }
 }

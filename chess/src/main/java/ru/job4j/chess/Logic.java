@@ -18,6 +18,7 @@ public class Logic {
     private int index = 0;
 
     public void add(Figure figure) {
+
         this.figures[this.index++] = figure;
     }
 
