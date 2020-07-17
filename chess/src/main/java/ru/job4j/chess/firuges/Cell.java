@@ -18,6 +18,7 @@ public enum Cell {
         this.y = y;
     }
 
+
     public static Cell findBy(int x, int y) {
         Cell rsl = null;
         for (Cell cell : values()) {
