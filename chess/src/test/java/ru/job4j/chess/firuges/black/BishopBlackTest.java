@@ -13,14 +13,14 @@ import static org.junit.Assert.*;
 public class BishopBlackTest extends TestCase {
 
     public void testWay() {
-        BishopBlack bishopBlack = new BishopBlack(Cell.D4);
-//        bishopBlack.way(Cell.C1, Cell.G5);
-        Cell[] way = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
-        assertThat(bishopBlack.way(Cell.D4, Cell.D7), is (way));
+        BishopBlack bishopBlack = new BishopBlack(Cell.C3);
+        Cell[] way = {Cell.D4, Cell.E5, Cell.F6, Cell.G7};
+        assertThat(bishopBlack.way(Cell.C3, Cell.G7), is (way));
     }
 
     public void testIsDiagonal() {
-
+        BishopBlack bishopBlack = new BishopBlack(Cell.D6);
+        assertThat(bishopBlack.isDiagonal(Cell.D6, Cell.G3), is (true));
     }
 
     public void testCopy() {
