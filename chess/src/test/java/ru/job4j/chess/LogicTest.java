@@ -16,5 +16,7 @@ public class LogicTest {
         logic.add(new BishopBlack(Cell.C1));
         boolean rsl = logic.move(Cell.C1, Cell.H6);
         assertThat(rsl, is(true));
+        System.out.println(Cell.H6);
+
     }
 }

@@ -26,7 +26,8 @@ public class BishopBlackTest extends TestCase {
     public void testCopy() {
         BishopBlack bishopBlack = new BishopBlack(Cell.D4);
         assertThat(bishopBlack.copy(Cell.E5).position(), is (Cell.findBy(4,4)));
-        System.out.println(Cell.E5.x + Cell.E5.y);
+//        bishopBlack.copy(Cell.E5);
+//        System.out.println(bishopBlack.position());
     }
 
     public void testPosition() {
