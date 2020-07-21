@@ -14,9 +14,20 @@ public class LogicTest {
     public void move() {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
+        logic.add(new BishopBlack(Cell.H7));
         boolean rsl = logic.move(Cell.C1, Cell.H6);
         assertThat(rsl, is(true));
-        System.out.println(Cell.H6);
+    }
+
+    @Test
+    public void notMove() {
+        Logic logic = new Logic();
+        logic.add(new BishopBlack(Cell.C1));
+        logic.add(new BishopBlack(Cell.H6));
+        boolean rsl = logic.move(Cell.C1, Cell.H6);
+        assertThat(rsl, is(false));
+
+        System.out.println(logic.toString());
 
     }
 }

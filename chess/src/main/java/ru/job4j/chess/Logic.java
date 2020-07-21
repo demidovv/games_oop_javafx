@@ -24,12 +24,18 @@ public class Logic {
 
     public boolean move(Cell source, Cell dest) {
         boolean rst = false;
-        int index = this.findBy(source);    // получаем индекс фигуры в массиве figures
-        if (index != -1) {                  // если объект найден,
-            Cell[] steps = this.figures[index].way(source, dest);   // то получаем его ходы до клетки Cell dest
-            // проверяем, что массив way не заполнен другими объектами класса Figure
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-
+        int index = this.findBy(source);                                     // получаем индекс фигуры в массиве figures
+        if (index != -1) {                                                   // если объект найден,
+            Cell[] steps = this.figures[index].way(source, dest);            // то получаем его ходы до клетки Cell dest
+                                                                            // проверяем, что массив way не заполнен другими объектами класса Figure
+            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) { // шаги есть и последний шаг соответствует пункту назначения
+                for (int i = 0; i < steps.length; i++) {
+                    for (int j = 0; j < 32; j++) {
+                        if (this.figures[j] != null && this.figures[j].position().equals(steps[i])) {
+                            return false;
+                        }
+                    }
+                }
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
             }
@@ -54,10 +60,6 @@ public class Logic {
         }
         return rst;
     }
-
-//    private boolean onWay(Cell[] way) {
-//
-//    }
 
     @Override
     public String toString() {
