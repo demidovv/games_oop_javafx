@@ -26,28 +26,35 @@ public class Logic {
         boolean rst = false;
         int index = this.findBy(source);                                     // получаем индекс фигуры в массиве figures
         if (index != -1) {                                                   // если объект найден,
-            Cell[] steps = this.figures[index].way(source, dest);            // то получаем его ходы до клетки Cell dest
-                                                                            // проверяем, что массив way не заполнен другими объектами класса Figure
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) { // шаги есть и последний шаг соответствует пункту назначения
-                for (int i = 0; i < steps.length; i++) {
-                    for (int j = 0; j < 32; j++) {
-                        if (this.figures[j] != null && this.figures[j].position().equals(steps[i])) {
-                            return false;
-                        }
-                    }
+            try {
+                Cell[] steps = this.figures[index].way(source, dest);            // то получаем его ходы до клетки Cell dest
+                if (steps.length > 0 && steps[steps.length - 1].equals(dest)            // проверяем, что массив way не заполнен другими объектами класса Figure
+                        && freeWay(steps)) {                                            // шаги есть и последний шаг соответствует пункту назначения
+                    rst = true;
+                    this.figures[index] = this.figures[index].copy(dest);
                 }
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
             }
         }
         return rst;
     }
+
 
     public void clean() {
         for (int position = 0; position != this.figures.length; position++) {
             this.figures[position] = null;
         }
         this.index = 0;
+    }
+
+    private boolean freeWay (Cell[] steps) {        //проверка свободного пути
+        for (Cell cell: steps) {
+            if (findBy(cell) != -1) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private int findBy(Cell cell) {

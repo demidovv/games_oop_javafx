@@ -2,6 +2,7 @@ package ru.job4j.chess.firuges.black;
 
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
+import java.lang.Math;
 
 public class BishopBlack implements Figure {
     private final Cell position;
@@ -24,23 +25,25 @@ public class BishopBlack implements Figure {
                     String.format("Could not move by diagonal from %s to %s", source, dest)
             );
         }
-
-        int size = source.x > dest.x ? source.x - dest.x: dest.x - source.x;
+        int x = source.x;
+        int y = source.y;
+        int size = Math.abs(x - dest.x);
         Cell[] steps = new Cell[size];
-        int deltaX = source.x > dest.x ? -1 : 1;
-        int deltaY = source.y > dest.y ? -1 : 1;
+        int deltaX = x > dest.x ? -1 : 1;
+        int deltaY = y > dest.y ? -1 : 1;
+
+
         for (int index = 0; index < size; index++) {
-            steps[index] = Cell.findBy(source.x + deltaX + index * deltaX, source.y + deltaY + index * deltaY);
+            x += deltaX;
+            y += deltaY;
+            steps[index] = Cell.findBy(x, y);
         }
         return steps;
     }
 
 
     public boolean isDiagonal(Cell source, Cell dest) {
-        if (dest.y == source.y - source.x + dest.x || dest.y == source.y + source.x - dest.x) {
-            return true;
-        }
-        return false;
+        return Math.abs(source.x - dest.x) == Math.abs(source.y - dest.y);
     }
 
     @Override

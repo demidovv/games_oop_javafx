@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class LogicTest {
 
-    @Ignore
+//    @Ignore
     @Test
     public void move() {
         Logic logic = new Logic();
@@ -26,8 +26,5 @@ public class LogicTest {
         logic.add(new BishopBlack(Cell.H6));
         boolean rsl = logic.move(Cell.C1, Cell.H6);
         assertThat(rsl, is(false));
-
-        System.out.println(logic.toString());
-
     }
 }
